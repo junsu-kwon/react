@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    // 어째서 state가 필요한지 설명하기 위한 소스
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    let counter = 0;
+
+    function countUp() {
+      counter += 1;
+      render();
+      // 값 적용을 위해 리렌더링을 일으켜야한다 -> 비효율적인 호출
+    }
+
+    function render() {
+      root.render(<Container />);
+    }
+
+    function Container() {
+      return (
+        <div>
+          <h3>클릭 수 : {counter}</h3>
+          <button onClick={countUp}>Click me</button>
+        </div>
+      );
+    }
+
+    render();
+
+  </script>
+</body>
+
+</html>

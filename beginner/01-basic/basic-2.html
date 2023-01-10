@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    // react 18 버전
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    const Title = (
+      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+        hello I'm a title
+      </h3>
+    );
+
+    const Button = (
+      <button
+        style={{ backgroundColor: "tomato" }}
+        onClick={() => console.log("im clicked")}
+      >
+        click me
+      </button>
+    );
+
+    const container = React.createElement("div", null, [Title, Button]); // 여러개 등록은 배열로
+    root.render(container);
+
+  </script>
+</body>
+
+</html>

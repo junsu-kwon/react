@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <!-- 일반적인 자바스크립트 사용 방식 -->
+
+  <span>클릭 수 : 0</span>
+  <button id="btn">Click me</button>
+
+  <script>
+
+    let counter = 0;
+    const button = document.getElementById("btn");
+    const span = document.querySelector("span");
+    function hadnleClick() {
+      counter += 1;
+      span.innerText = `클릭 수 : ${counter}`;
+    }
+    button.addEventListener("click", hadnleClick);
+
+  </script>
+</body>
+
+</html>

@@ -10,10 +10,11 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
+    // Babel이 동작하기 위해선 해당 선언이 필요하다.
 
-    // react 18 버전
     const root = ReactDOM.createRoot(document.getElementById("root"));
 
+    // JSX 문법 사용
     const Title = (
       <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
         hello I'm a title

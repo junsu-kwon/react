@@ -10,7 +10,7 @@
 
   <script type="text/babel">
 
-    // 어째서 state가 필요한지 설명하기 위한 소스
+    // 왜 state가 필요한지 설명하기 위한 소스
 
     const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -20,6 +20,7 @@
       counter += 1;
       render();
       // 값 적용을 위해 리렌더링을 일으켜야한다 -> 비효율적인 호출
+      // 리액트는 전체를 리렌더링해도 바뀐부분만 업데이트한다.
     }
 
     function render() {

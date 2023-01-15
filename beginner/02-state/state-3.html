@@ -16,12 +16,16 @@
       const [counter, setCounter] = React.useState(0); // [초기값, Setter 함수]
 
       const onClick = () => {
-        setCounter(counter + 1);
         // Setter 함수 사용 시 해당 부분만 자동 리렌더링 = ( 자동 실행 root.render(<App />) );
-      }
+        // setCounter(counter + 1);
+        // 위 방식은 counter가 외부에서 변화될 여지가 있어서 그 값의 안정성이 보장되지 않는다.
 
-      console.log("rendered");
-      console.log(counter);
+        setCounter(current => current + 1);
+        // 현재 state를 바탕으로 다음 state를 계산해내고 싶다면 함수를 사용해야한다.
+        // 언제나 현재 state를 얻을 수 있다.
+        // 반환 값이 state에 반영된다.
+
+      }
 
       return (
         <div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    function App() {
+
+      /**
+       * ! Hook useState 객체 사용시 유의할 점
+       */
+
+      const [person, setPerson] = React.useState({ name: "준수", age: 30 });
+
+      console.log(person);
+
+      /**
+       * ! 원본의 복사본을 무조건 앞에 넣어야 한다. 
+       */
+      const onClick = () => setPerson({ ...person, name: "하늘" });
+
+      return (
+        <button onClick={onClick}>
+          {person.name}
+        </button>
+      );
+    }
+
+    root.render(<App />);
+
+  </script>
+</body>
+
+</html>

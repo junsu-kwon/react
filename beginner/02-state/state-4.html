@@ -16,7 +16,7 @@
       /**
        * 
        * class나 for와 같은 문법들은 이미 자바스크립트에 정의되어 있는 문법 
-       * - 자바스크립트에 의해 이미 선점된 단어
+       * ? 자바스크립트에 의해 이미 선점된 단어
        * 
        * JSX 문법 내에서 사용 시 에러를 발생시킨다.
        * 
@@ -35,6 +35,8 @@
         <div>
           <h1>Super Converter</h1>
           <label htmlFor="minutes">minutes</label>
+
+          {/* onChange와 value는 한쌍이다. 같이 쓰지 않으면 오류 발생 */}
           <input value={minutes} id="minutes" placeholder="minutes" type="number" onChange={onChange} />
 
           <h4>You want to convert : {minutes}</h4>

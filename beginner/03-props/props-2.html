@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    function Btn({ text, changeValue }) {
+
+      console.log(text, "was rendered");
+
+      return <button
+        onClick={changeValue}
+        style={{
+          backgroundColor: "tomato",
+          color: "white",
+          padding: "10px 20px",
+          borderRadius: 10,
+          border: 0,
+        }}>{text}</button>
+    }
+
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
+
+      return (
+        <div>
+          <Btn text={value} changeValue={changeValue} /> {/* props일 뿐 */}
+          
+          {
+            /** 
+             * 해당 컴포넌트는 값이 바뀌지않는다. 리렌더링 할 필요가 없다.
+             * 
+             * props를 사용할때  
+             * 부모의 컴포넌트를 수정하면 자식 컴포넌트들이 전부 수정이 된다.
+             * 이때 굳이 리렌더링하지 않아도 되는 컴포넌트들이 있을텐데
+             * 이런 상황에서 
+             * ! React.memo() 를 사용한다.
+             *  
+             */
+          }
+          <Btn text="Continue" />
+
+        </div>
+      );
+    }
+    root.render(<App />);
+  </script>
+</body>
+
+</html>

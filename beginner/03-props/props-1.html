@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    /**
+     * 컴포넌트를 재사용 가능하게 만든다.
+     * ? function Btn(props) <= 구식의 방법
+     * - function Btn({text = "default"})
+     */
+    function Btn({text = "btn", size}) {
+      return <button style={{
+        backgroundColor: "tomato",
+        color: "white",
+        padding: "10px 20px",
+        borderRadius: 10,
+        border: 0,
+        fontSize: size ?? 16,
+      }}>{text}</button>
+    }
+
+    /**
+     * - Btn({text:"Save Changes"}); = <Btn text="Save Changes"/>
+     */
+    function App() {
+      return (
+        <div>
+          <Btn text="Save Changes" size={10}/>
+          <Btn text="Continue"/>
+        </div>
+      );
+    }
+    root.render(<App />);
+  </script>
+</body>
+
+</html>

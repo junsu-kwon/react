@@ -11,32 +11,52 @@
 
   <script type="text/babel">
 
+    // 제 아무리 지지고 볶아도 최초 한번만 실행된다.
+    console.log("자바스크립트 로드 시작");
+
     const root = ReactDOM.createRoot(document.getElementById("root"));
 
-    // onClick props는 함수를 전달 받고 있다. 함수도 결국 객체이기 때문에 주소값이 달라 useMemo가 소용없다.
+    // onClick props는 함수를 전달 받고 있다. 함수도 결국 객체이기 때문에 주소값이 달라 useMemo가 소용없다. => 계속 리렌더링 될 것이다.
     const Btn1 = React.memo(({ test, onClick }) => {
-      console.log(`Btn1_${test}`);
+      console.log(`[render] Btn1_${test}`);
+      
       return <button onClick={onClick}>Btn1</button>;
     })
 
+    // useMemo를 통해 해당 컴포넌트는 리렌더링 되지 않는다 (고정값이기 때문)
     const Btn2 = React.memo(() =>{
-      console.log("Btn2");
+      console.log("[render] Btn2");
+
       return <button>Btn2</button>;
     })
 
     function Btn3() {
-      console.log("Btn3");
+      console.log("[render] Btn3");
+
       return <button>Btn3</button>;
     }
 
-    function ReRender() {
-      console.log("Btn-render");
+    // 해당 컴포넌트내에서 선언한 useState는 setter를 호출하면 해당 컴포넌트만 리렌더링 된다.
+    function Btn4() {
+      const [test, setTest] = React.useState(false);
+      const onClick = () => setTest(test => !test);
+
+      console.log(`[render] Btn4_${test}`);
+
+      return <button onClick={onClick}>Btn4</button>;
+    }
+
+    function AppReRender() {
+      console.log("[render] Btn-render");
+
       const onClick = () => { root.render(<App />) }
       return <button onClick={onClick}>ReRender</button>
     }
-
+    
     function App() {
+      console.log("[render] App");
 
+      // useState가 선언된 컴포넌트만 리렌더링 된다.
       const [test, setTest] = React.useState(false);
       const onClick = () => setTest(test => !test);
 
@@ -46,6 +66,8 @@
        * ? 2. 부모 컴포넌트로부터 전달받은 props가 변경될 때
        * ? 3. 부모 컴포넌트가 리렌더링 될 때
        * 
+       * ! useState가 선언된 컴포넌트만 리렌더링 된다.
+       * 
        * ! => useMemo를 사용하여 최적화를 해보자
        * 
        * - useCallback과 useMemo는 메모이제이션 된 값을 반환한다. 차이점은 useCallback은 함수를 메모이제이션하고 useMemo는 값을 메모이제이션한다.
@@ -53,20 +75,20 @@
        * - object !== object
        * - 리렌더링이 발생되면 해당 컴포넌트의 모든 객체들은 다시 생성된다.( ❗ 함수도 객체이다. ) 
        * - javascript에서 객체는 참조타입으로 완전히 동일한 값을 가지고 있더라도 참조하는 주소가 다르면 서로 다른 객체로 취급된다. 
-       * ! 그래서 onClick을 넣으면 해당 컴포넌트가 memo에 등록되어도 계속 리렌더링 되는 것 
+       * ! 그래서 onClick을 넣으면 해당 컴포넌트가 useMemo에 등록되어도 계속 리렌더링 되는 것 
        */
       return (
         <div>
           <Btn1 test={test} onClick={onClick} />
           <Btn2 />
           <Btn3 />
-          <ReRender />
+          <AppReRender />
         </div>
       );
 
     }
 
-    root.render(<App />);
+    root.render([<App />,<Btn4 />]);
 
   </script>
 </body>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    function Btn({ text, fontSize = 14 }) { // 기본값
+
+      return <button
+        style={{
+          backgroundColor: "tomato",
+          color: "white",
+          padding: "10px 20px",
+          borderRadius: 10,
+          border: 0,
+        }}>{text}</button>
+    }
+
+
+    /**
+     * PropTypes는 단지 
+     * ! 콘솔창에 오류를 발생시킬 뿐이다. 
+     */
+    Btn.propTypes = {
+      text: PropTypes.string,
+      fontSize: PropTypes.number.isRequired,
+
+      // text : PropTypes.sring.isRequired, 
+      // fontSize : PropTypes.number.isRequired,
+      // => 필수요소, prop로 들어오지 않으면 콘솔에 에러를 출력한다.
+    }
+
+    function App() {
+      return (
+        <div>
+          <Btn text="Save Changes" fontSize={18} />
+
+          {/* 아래처럼 원하는 타입이 아닐수도 있다 => Prop0Type을 사용해보자!! */}
+          <Btn text="Test" />
+        </div>
+      );
+    }
+    root.render(<App />);
+  </script>
+</body>
+
+</html>

@@ -19,6 +19,8 @@
 
         /**
          * Setter 함수 사용 시 해당 부분만 자동 리렌더링 = ( 자동 실행 root.render(<App />) );
+         * - Setter가 선언된 컴포넌트만 리렌더링된다.
+         * 
          * ? setCounter(counter + 1);
          * ? 위 방식은 counter가 외부에서 변화될 여지가 있어서 그 값의 안정성이 보장되지 않는다.
          * 
@@ -26,7 +28,6 @@
          * ! 언제나 현재 state를 얻을 수 있다. 반환 값이 state에 반영된다.
          */
         setCounter(current => current + 1);
-
 
       }
 

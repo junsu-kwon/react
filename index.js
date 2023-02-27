@@ -1,11 +1,11 @@
 (async () => {
   let url =
-    'https://api.gith123ub.com/rasdasdepos/javascript-tutorial/ko.javascri123123pt.info/co123mmits';
+    'https://api.github.com/rasdasdepos/javascript-tutorial/ko.javascript.info/commits';
   let response = fetch(url);
 
   console.log(response);
 
-  response.then((response) => console.log(response));
+  response.then((response) => response.text()).then(json=> console.log(json));
 
 
   // let promise = new Promise((resolve, reject) => {
